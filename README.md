@@ -20,8 +20,6 @@ This repository documents my progress, projects, and resources while learning **
 ├── 📁 .git/ 🚫 (auto-hidden)
 ├── 📁 Ann/
 ├── 📁 Davin/
-│   ├── 🔵 Ex1.dart
-│   └── 🔵 Ex2.dart
 ├── 📁 Sereyvong/
 ├── 📁 Sokleap/
 └── 📖 README.md
