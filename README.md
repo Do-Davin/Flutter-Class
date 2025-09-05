@@ -17,14 +17,14 @@ This repository documents my progress, projects, and resources while learning **
 
 ## 📂 Repository Structure
 ```
-learning-flutter/
-│
-├── 01_basics/           # Dart & Flutter basics
-├── 02_widgets/          # Exploring Flutter widgets
-├── 03_layouts/          # UI layouts & responsive design
-├── 04_state_management/ # State management techniques
-├── 05_projects/         # Mini-projects & apps
-└── resources.md         # Useful links, docs, and tutorials
+├── 📁 .git/ 🚫 (auto-hidden)
+├── 📁 Ann/
+├── 📁 Davin/
+│   ├── 🔵 Ex1.dart
+│   └── 🔵 Ex2.dart
+├── 📁 Sereyvong/
+├── 📁 Sokleap/
+└── 📖 README.md
 ```
 
 ---
@@ -46,8 +46,8 @@ flutter doctor
 ## 🚀 Getting Started
 Clone the repository:
 ```bash
-git clone https://github.com/your-username/learning-flutter.git
-cd learning-flutter
+git clone https://github.com/Do-Davin/Flutter-Class.git
+cd Flutter-Class
 ```
 
 Run your first Flutter app:
@@ -70,16 +70,8 @@ Here are some excellent resources I use along the way:
 
 ## 📌 Progress Tracking
 - ✅ Learned Dart basics  
-- ✅ Built first “Hello World” app  
 - 🔄 Exploring Flutter widgets  
 - ⏳ Next: State Management  
-
 ---
-
-## 🤝 Contribution
-This is primarily a **personal learning repo**, but if you’d like to share tips, corrections, or resources, feel free to open a pull request or create an issue.  
-
----
-
 ## 📜 License
 This repository is licensed under the [MIT License](LICENSE).  
