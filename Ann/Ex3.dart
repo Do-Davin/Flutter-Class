@@ -1,31 +1,38 @@
 import 'dart:io';
-void main(){
 
-  try {
-    do {
-      stdout.write("Enter your score(0-100): ");
-      double score = double.parse(stdin.readLineSync()!);
-      grade(score);
-    } while (true);
-  } catch (e) {
-    print("Invalid input. Please input a valid number only.");
+void main() {
+
+  while (true) {
+    stdout.write("Enter your score (0-100) or type 'q' to quit: ");
+    String? input = stdin.readLineSync();
+    if (input == null || input.trim().isEmpty) {
+      print("No input detected. Try again.");
+      continue;
+    }
+    if (input.trim().toLowerCase() == 'q') {
+      print("Exiting program. Goodbye!");
+      break;
+    }
+    //tryParse: Convert string into integer or double
+    double? score = double.tryParse(input);
+    if (score == null) {
+      print("Invalid input. Please enter a valid number.");
+      continue;
+    }
+    if (score < 0 || score > 100) {
+      print("Score must be between 0 and 100.");
+      continue;
+    }
+    print("Grade: ${getGrade(score)}");
   }
 
 }
-void grade(double score){
-    if(score >= 90 && score <= 100){
-      print("Grade: A");
-    }else if(score >= 80 && score <= 89){
-      print("Grade: B");
-    }else if(score >= 70 && score <= 79){
-      print("Grade: C");
-    }else if(score >= 60 && score <= 69){
-      print("Grade: D");
-    }else if(score >= 50 && score <= 59){
-      print("Grade: E");
-    }else if(score >= 0 && score <= 49){
-      print("Grade: F");
-    }else{
-      print("Invalid input");
-    }
+
+String getGrade(double score) {
+  if (score >= 90) return 'A';
+  if (score >= 80) return 'B';
+  if (score >= 70) return 'C';
+  if (score >= 60) return 'D';
+  if (score >= 50) return 'E';
+  return 'F';
 }
