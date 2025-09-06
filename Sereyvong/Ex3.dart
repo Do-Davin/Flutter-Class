@@ -5,7 +5,9 @@ void main() {
     stdout.write("Enter your score (0-100): ");
     int score = int.parse(stdin.readLineSync()!);
 
-    if (score >= 90) {
+    if (score < 0 || score > 100) {
+      print("Invalid input please try again");
+    } else if (score >= 90) {
       print("Grade: A\n");
     } else if (score >= 80) {
       print("Grade: B\n");
