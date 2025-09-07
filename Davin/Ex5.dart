@@ -128,6 +128,7 @@ void general() {
         break;
       }
       case 0: {
+        clear();
         break;
       }
       default: {
@@ -137,6 +138,94 @@ void general() {
     }
       
   } while(subChoice != 0);
+}
+
+void otherNetworks() {
+  int? back;
+  clear();
+
+  do {
+    print("Wi-Fi > Other Networks:\n");
+    print("\tDT-Coffee:\t\t******");
+    print("\tLibrary_Network:\t****");
+    print("\tPublic_Hotspot:\t\t***");
+    print("\t0. Back\n");
+    stdout.write("Choice: ");
+
+    String? input = stdin.readLineSync();
+    if(input == null || input.trim().isEmpty) {
+      clear();
+      print("Please input number only!\n");
+      continue;
+    }
+
+    back = int.tryParse(input);
+    if(back != 0) {
+      clear();
+      print("Please input number '0' to go back!\n");
+    } else {
+      clear();
+      return;
+    }
+  } while(back != 0);
+}
+
+void wifi() {
+  int? choice;
+  clear();
+
+  do {
+    print("Wi-Fi:\n");
+    print("\tStatus\t\tOn");
+    print("\tNetwork\t\tCoffee-Shop-Guest\n");
+    print("\t1. Other Networks\t\t>");
+    print("\t0. back\n");
+    stdout.write("Choice: ");
+
+    String? input = stdin.readLineSync();
+    if(input == null || input.trim().isEmpty) {
+      clear();
+      print("Please input number only!\n");
+      continue;
+    }
+
+    choice = int.tryParse(input);
+    if(choice == 1) {
+      otherNetworks();
+    } else if(choice == 0) {
+      clear();
+      return;
+    } else {
+      clear();
+      print("Please input number '0' to go back!\n");
+    }
+  } while(choice != 0);
+}
+
+void brew() {
+  int? back;
+  clear();
+
+  do {
+    print("Brew Settings:\n");
+    print("\tThe feature is not available!");
+    print("\t0. Back\n");
+    stdout.write("Choice: ");
+    String? input = stdin.readLineSync();
+    if(input == null || input.trim().isEmpty) {
+      clear();
+      print("Please input number only!\n");
+      continue;
+    }
+    back = int.tryParse(input);
+    if(back != 0) {
+      clear();
+      print("Please input number '0' to go back!\n");
+    } else {
+      clear();
+      return;
+    }
+  } while(back != 0);
 }
 
 void main() {
@@ -164,9 +253,11 @@ void main() {
         break;
       }
       case 2: {
+        wifi();
         break;
       }
       case 3: {
+        brew();
         break;
       }
       case 0: {
@@ -175,10 +266,10 @@ void main() {
         break;
       }
       default: {
+        clear();
         print("\nInvalid Input! Please try again...\n");
         break;
       }
     }
-
   } while(choice != 0);
 }
