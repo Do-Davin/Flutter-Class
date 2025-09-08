@@ -1,5 +1,6 @@
 import 'dart:io';
 
+// Store all states of menu  to make it more readable and prevent error from using normal String
 enum MenuState {
   main,
   general,
@@ -12,6 +13,7 @@ enum MenuState {
 }
 
 class Setting {
+  // Create a singleton to avoid many instances.
   static final Setting _instance = Setting._privateConstructor();
   Setting._privateConstructor();
 
@@ -80,6 +82,7 @@ class Setting {
 }
 
 class SettingManager {
+  // Stack that use for stacking screens
   final List<MenuState> _navigationStack = [MenuState.main];
 
   void run() {
@@ -92,10 +95,13 @@ class SettingManager {
         String? input = stdin.readLineSync();
         int choice = input == null || input.isEmpty ? -1 : int.parse(input);
 
+        // if user enter 0
         if (choice == 0) {
           if (_navigationStack.length > 1) {
+            // If we have more than 2 that one screen stack on another, it will remove the top screen (like pop the top screen out)
             _navigationStack.removeLast();
           } else {
+            // if we have only 1 screen (main screen) in stack, it will exit our program
             print(
               "\nThank you for using the Coffee Shop Setting application. Goodbye!",
             );
@@ -103,6 +109,7 @@ class SettingManager {
             continue;
           }
         } else {
+          //if user not enter 0
           _handleChoice(choice);
         }
       } on FormatException {
@@ -113,6 +120,7 @@ class SettingManager {
     }
   }
 
+  // display current screen (the top screen)
   void _displayCurrentMenu() {
     switch (_navigationStack.last) {
       case MenuState.main:
@@ -142,6 +150,7 @@ class SettingManager {
     }
   }
 
+  // Check to see whether screen we are on to handle validation
   void _handleChoice(int choice) {
     switch (_navigationStack.last) {
       case MenuState.main:
@@ -163,6 +172,7 @@ class SettingManager {
     }
   }
 
+  // handle main screen, will stack new screen on current screen if (1-3) and validate
   void _handleMainChoice(int choice) {
     switch (choice) {
       case 1:
