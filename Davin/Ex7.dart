@@ -150,13 +150,13 @@ void viewTask() {
     return;
   }
 
-  for(int i = 0; i < lists.length; i++) {
+  for(var list in lists) {
+    String status = list.isCompleted ? "[x]" : "[ ]";
+    print("${status} ${list.id}. ${list.desc}");
 
-    if(lists[i].isCompleted) {
-      print("[x] ${lists[i].id}. ${lists[i].desc}");
+    if(list.isCompleted) {
       done++;
     } else {
-      print("[ ] ${lists[i].id}. ${lists[i].desc}");
       pending++;
     }
   }
