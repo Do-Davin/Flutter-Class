@@ -3,11 +3,11 @@ import 'dart:io';
 class ToDoList {
   int id;
   String desc;
-  bool done;
-  ToDoList(this.id, this.desc, {this.done = false});
+  bool isCompleted;
+  ToDoList(this.id, this.desc, {this.isCompleted = false});
 }
 
-  List<ToDoList> lists = [];
+List<ToDoList> lists = [];
 
 void clear() {
   // \x1B = ESC
@@ -21,6 +21,17 @@ void pause() {
   stdin.readLineSync(); // waits until user presses Enter
 }
 
+int getValidNumber(String prompt) {
+  while(true) {
+    stdout.write(prompt);
+    String? input = stdin.readLineSync();
+    int? num = int.tryParse(input ?? "");
+    if(num != null) return num;
+    clear();
+    print("⚠️  Invalid number! Try again.\n");
+  }
+}
+
 void menu() {
   print("=== To-Do List Application ===");
   print("1. Add Task");
@@ -29,7 +40,6 @@ void menu() {
   print("4. View All Tasks");
   print("5. Exit");
   print("-------------------------------");
-  stdout.write("Enter your choice: ");
 }
 
 void addTask() {
@@ -61,26 +71,7 @@ void markAsDone() {
     return;
   }
 
-  int? targetID;
-  String? input;
-  while(true) {
-    stdout.write("👉 Enter task number to mark as done: ");
-    input = stdin.readLineSync();
-    if(input == null || input.trim().isEmpty) {
-      clear();
-      print("⚠️  Please input a number!\n");
-      continue;
-    } 
-
-    targetID = int.tryParse(input);
-    if(targetID == null) {
-      clear();
-      print("⚠️ Invalid number! Please try again.\n");
-      continue;
-    }
-
-    break;
-  }
+  int targetID = getValidNumber("👉 Enter task number to mark as done: ");
   
   var list = lists.firstWhere(
     (t) => t.id == targetID,
@@ -92,8 +83,12 @@ void markAsDone() {
     pause();
     clear();
   } else {
-    list.done = true;
-    print("✅ Task \"${list.desc}\" marked as done!\n");
+    if(list.isCompleted) {
+      print("⚠️  Task \"${list.desc}\" is already marked as done!");
+    } else {
+      list.isCompleted = true;
+      print("✅ Task \"${list.desc}\" marked as done!\n");
+    }
     viewTask();
   }
 }
@@ -101,30 +96,12 @@ void markAsDone() {
 void deleteTask() {
   if(lists.isEmpty) {
     print("❌ No tasks available.");
+    pause();
+    clear();
     return;
   }
 
-  String? input;
-  int? targetID;
-
-  while(true) {
-    stdout.write("👉 Enter task number to delete: ");
-    input = stdin.readLineSync();
-    if(input == null || input.trim().isEmpty) {
-      clear();
-      print("⚠️  Please input a number!\n");
-      continue;
-    }
-
-    targetID = int.tryParse(input);
-    if(targetID == null) {
-      clear();
-      print("⚠️ Invalid number! Please try again.\n");
-      continue;
-    }
-
-    break;
-  }
+  int targetID = getValidNumber("👉 Enter task number to delete: ");
 
   int index = lists.indexWhere((t) => t.id == targetID);
 
@@ -133,9 +110,9 @@ void deleteTask() {
     pause();
     clear();
   } else {
-    String deleteTask = lists[index].desc;
+    String deleteTaskDesc = lists[index].desc;
     lists.removeAt(index);
-    print("🗑️  Task \"$deleteTask\" deleted successfully!");
+    print("🗑️  Task \"$deleteTaskDesc\" deleted successfully!");
 
     // Reassign IDs so they stay in order.
     for (int i = 0; i < lists.length; i++) {
@@ -147,7 +124,7 @@ void deleteTask() {
 }
 
 void viewTask() {
-  int complete = 0;
+  int done = 0;
   int pending = 0;
   print("=== Current Tasks ===");
 
@@ -160,32 +137,26 @@ void viewTask() {
 
   for(int i = 0; i < lists.length; i++) {
 
-    if(lists[i].done) {
+    if(lists[i].isCompleted) {
       print("[x] ${lists[i].id}. ${lists[i].desc}");
-      complete++;
+      done++;
     } else {
       print("[ ] ${lists[i].id}. ${lists[i].desc}");
       pending++;
     }
   }
   print("-------------------------------");
-  print("Total Tasks: ${lists.length} | Completed: $complete | Pending: ${pending}");
+  print("Total Tasks: ${lists.length} | Completed: $done | Pending: ${pending}");
   pause();
   clear();
 }
 
 void AppProcess() {
-  String? input;
-  int? choice;
+  int choice;
+  
   do {
     menu();
-    input = stdin.readLineSync();
-    if(input == null || input.trim().isEmpty) {
-      clear();
-      print("Please input number only!\n");
-      continue;
-    }
-    choice = int.tryParse(input);
+    choice = getValidNumber("Enter your choice: ");
     switch(choice) {
       case 1: {
         clear();
