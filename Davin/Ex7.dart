@@ -25,6 +25,14 @@ int getValidNumber(String prompt) {
   while(true) {
     stdout.write(prompt);
     String? input = stdin.readLineSync();
+/*
+  * ?? is the null-coalescing operator in Dart.
+  * It means: “If input is null, use "" instead.”
+  * So:
+  *   If input = "123" → result = "123"
+  *   If input = null → result = ""
+  * This prevents errors from passing null into int.tryParse().
+*/
     int? num = int.tryParse(input ?? "");
     if(num != null) return num;
     clear();
@@ -76,7 +84,7 @@ void markAsDone() {
   var list = lists.firstWhere(
     (t) => t.id == targetID,
     orElse: () => ToDoList(-1, "Not Found"),
-  );
+  ); // return object.
 
   if(list.id == -1) {
     print("❌ Task not found!");
@@ -119,7 +127,14 @@ void deleteTask() {
       lists[i].id = i + 1;
     }
 
-    viewTask();
+    if (lists.isEmpty) {
+      print("\n=== Current Tasks ===");
+      print("❌ No tasks available.");
+      pause();
+      clear();
+    } else {
+      viewTask();
+    }
   }
 }
 
@@ -153,7 +168,7 @@ void viewTask() {
 
 void AppProcess() {
   int choice;
-  
+
   do {
     menu();
     choice = getValidNumber("Enter your choice: ");
