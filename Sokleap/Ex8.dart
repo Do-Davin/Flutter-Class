@@ -57,12 +57,12 @@ void clearScreen() {
 }
 
 void pause() {
-  print("\nPress any key to continue...");
-  stdin.readByteSync(); // accept any key
+  print("\nPress enter to continue...");
+  stdin.readLineSync(); // consume entire line
 }
 
 void menu() {
-  print("=== Password Generator ===");
+  print("\n=== Password Generator ===");
   print("1. Generate Password");
   print("2. Exit");
   print("-------------------------------");
@@ -108,6 +108,8 @@ void main() {
         );
         if (passLength < 6) {
           print("⚠️  Password length must be at least 6!");
+          pause();
+          clearScreen();
           break;
         }
 
@@ -125,6 +127,8 @@ void main() {
         );
         if (!(isUsingUpper || isUsingLower || isUsingNumber || isUsingSymbol)) {
           print("⚠️  You must select at least one character type!");
+          pause();
+          clearScreen();
           break;
         }
 
@@ -137,12 +141,16 @@ void main() {
         );
         print("✅ Generated Password: $pass");
         pause();
+        clearScreen();
         break;
       case 2:
-        print("👋 Exiting Password Generator. Goodbye!");
+        clearScreen();
+        print("\n\n👋 Exiting Password Generator. Goodbye!");
         break;
       default:
         print("⚠️  Incorrect number! Please try again\n");
+        pause();
+        clearScreen();
     }
   }
 }
