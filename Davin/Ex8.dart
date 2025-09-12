@@ -59,6 +59,24 @@ String getValidString(String promt) {
   }
 }
 
+int getValidLength(String prompt) {
+  String? input;
+  int? length;
+  while(true) {
+    stdout.write(prompt);
+    input = stdin.readLineSync();
+    if(input == null || input.trim().isEmpty) {
+      clear();
+      print("⚠️  Invalid input! Try again.\n");
+      pause();
+      clear();
+      continue;
+    }
+    length = int.tryParse(input) ?? 0;
+    return length;
+  }
+}
+
 void main() {
   PasswordGenerator generator = PasswordGenerator();
   bool isRunning = true;
@@ -72,8 +90,7 @@ void main() {
 
     switch(input) {
       case "1": {
-        stdout.write("👉 Enter password length (min 6): ");
-        int length = int.tryParse(stdin.readLineSync() ?? "") ?? 0;
+        int length = getValidLength("👉 Enter password length (min 6): ");
         
         if(length < 6) {
           clear();
@@ -104,7 +121,7 @@ void main() {
       }
       default: {
         clear();
-        print("⚠️ Invalid choice! Try again.\n");
+        print("⚠️  Invalid choice! Try again.\n");
         pause();
         break;
       }
