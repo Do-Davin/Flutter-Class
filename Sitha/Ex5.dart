@@ -2,7 +2,6 @@ import 'dart:io';
 
 void main() {
   while (true) {
-
     print("\nCoffee Shop Setting:\n");
     print("1. General          >");
     print("2. Wi-Fi            >");
@@ -25,7 +24,6 @@ void main() {
     }
   }
 }
-
 
 void generalMenu() {
   while (true) {
@@ -56,47 +54,71 @@ void wifiMenu() {
     String? wifi = stdin.readLineSync();
 
     if (wifi == "1") {
-      print("\nWi-Fi > Other Networks:\n");
-      print("DT-Coffee:       ******");
-      print("Library_Network: ****");
-      print("Public_Hotspot:  ***");
-      print("0. Back");
-      stdin.readLineSync(); 
+      while (true) {
+        print("\nWi-Fi > Other Networks:\n");
+        print("DT-Coffee:       ******");
+        print("Library_Network: ****");
+        print("Public_Hotspot:  ***");
+        print("0. Back");
+        stdout.write("Enter your option: ");
+        String? other = stdin.readLineSync();
+        if (other == "0") break;
+        else print("Invalid input!");
+      }
     } else if (wifi == "0") break;
     else print("Invalid input!");
   }
 }
 
 void brewSettings() {
-  print("\nBrew Settings:\n");
-  print("The feature is not available!");
-  print("0. Back");
-  stdin.readLineSync();
+  while (true) {
+    print("\nBrew Settings:\n");
+    print("The feature is not available!");
+    print("0. Back");
+    stdout.write("Enter your option: ");
+    String? input = stdin.readLineSync();
+    if (input == "0") break;
+    else print("Invalid input!");
+  }
 }
 
-
 void showAbout() {
-  print("\nGeneral > About:\n");
-  print("Name      DT-Coffee");
-  print("Model     Barista v2.1");
-  print("Version   1.0");
-  print("0. Back");
-  stdin.readLineSync();
+  while (true) {
+    print("\nGeneral > About:\n");
+    print("Name      DT-Coffee");
+    print("Model     Barista v2.1");
+    print("Version   1.0");
+    print("0. Back");
+    stdout.write("Enter your option: ");
+    String? input = stdin.readLineSync();
+    if (input == "0") break;
+    else print("Invalid input!");
+  }
 }
 
 void showPricing() {
-  print("\nGeneral > Pricing:\n");
-  print("1. Espresso       \$3.50");
-  print("2. Latte          \$4.00");
-  print("3. Cappuccino     \$4.00");
-  print("0. Back");
-  stdin.readLineSync();
+  while (true) {
+    print("\nGeneral > Pricing:\n");
+    print("1. Espresso       \$3.50");
+    print("2. Latte          \$4.00");
+    print("3. Cappuccino     \$4.00");
+    print("0. Back");
+    stdout.write("Enter your option: ");
+    String? input = stdin.readLineSync();
+    if (input == "0") break;
+    else print("Invalid input!");
+  }
 }
 
 void showHours() {
-  print("\nGeneral > Opening Hours:\n");
-  print("Mon-Fri:       7 AM - 9 PM");
-  print("Sat-Sun:       7 AM - 12 AM");
-  print("0. Back");
-  stdin.readLineSync();
+  while (true) {
+    print("\nGeneral > Opening Hours:\n");
+    print("Mon-Fri:       7 AM - 9 PM");
+    print("Sat-Sun:       7 AM - 12 AM");
+    print("0. Back");
+    stdout.write("Enter your option: ");
+    String? input = stdin.readLineSync();
+    if (input == "0") break;
+    else print("Invalid input!");
+  }
 }
